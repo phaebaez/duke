@@ -1,12 +1,10 @@
-package duke;
-
 import java.util.ArrayList;
 
 /** Represents a parser that parses input string
  *    to determine what command is run.
  */
 public class Parser {
-    private int counter;
+    private static int counter;
     private ArrayList<Task> tasklist;
 
     /** Creates a parser object which takes in an arraylist
@@ -28,26 +26,26 @@ public class Parser {
      * @param tasks is the current list of tasks before the modification
      * @return the arraylist of tasks after the modfication
      */
-    public ArrayList<Task> parseCommand(String nextString, TaskList tasks) {
+    public static String parseCommand(String nextString, TaskList tasks) throws DukeException {
         Ui ui = new Ui();
         if (nextString.equals("list")) {
-            tasks.listTasks();
+            return tasks.listTasks();
         } else if (nextString.contains("done")) {
-            tasks.markComplete(nextString);
+            return tasks.markComplete(nextString);
         } else if (nextString.contains("find")) {
-            tasks.findTask(nextString);
+            return tasks.findTask(nextString);
         } else if (nextString.contains("todo")) {
-            tasks.addTodo(nextString);
             counter++;
+            return tasks.addTodo(nextString);
         } else if (nextString.contains("deadline")) {
-            tasks.addDeadline(nextString);
             counter++;
+            return tasks.addDeadline(nextString);
         } else if (nextString.contains("event")) {
-            tasks.addEvent(nextString);
             counter++;
+            return tasks.addEvent(nextString);
         } else if (nextString.contains("delete")) {
-            tasks.deleteTask(nextString);
             counter--;
+            return tasks.deleteTask(nextString);
         } else {
             try {
                 throw new DukeException(ui.showWrongFormat());
@@ -55,6 +53,6 @@ public class Parser {
                 e.printStackTrace();
             }
         }
-        return tasklist;
+        return ui.showErrorMsg();
     }
 }

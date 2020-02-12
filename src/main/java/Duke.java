@@ -1,5 +1,3 @@
-package duke;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,9 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.util.ArrayList;
-import java.util.Scanner;
 
 /** Simulates a personal assistant chatbot.
  * called Duke that acts as a reminder
@@ -44,6 +39,7 @@ public class Duke extends Application {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        tasks = new TaskList(storage.load(), storage.load().size());
     }
 
     public Duke() {
@@ -53,26 +49,26 @@ public class Duke extends Application {
     /**
      * Runs the program.
      */
-    public void run() {
-        ui.greet();
-        ArrayList<Task> tasklist = storage.load();
-        counter = tasklist.size();
-        tasks = new TaskList(tasklist, counter);
-
-        Scanner scanner = new Scanner(System.in);
-        Parser parser = new Parser(tasklist, counter);
-        String nextString;
-        while (scanner.hasNext()) {
-            nextString = scanner.nextLine();
-            if (nextString.equals("bye")) {
-                System.out.println(ui.sayBye());
-                break;
-            } else {
-                parser.parseCommand(nextString, tasks);
-            }
-        }
-        storage.save(tasklist);
-    }
+//    public void run() {
+//        ui.greet();
+//        ArrayList<Task> tasklist = storage.load();
+//        counter = tasklist.size();
+//        tasks = new TaskList(tasklist, counter);
+//
+//        Scanner scanner = new Scanner(System.in);
+//        Parser parser = new Parser(tasklist, counter);
+//        String nextString;
+//        while (scanner.hasNext()) {
+//            nextString = scanner.nextLine();
+//            if (nextString.equals("bye")) {
+//                System.out.println(ui.sayBye());
+//                break;
+//            } else {
+//                parser.parseCommand(nextString, tasks);
+//            }
+//        }
+//        storage.save(tasklist);
+//    }
 
 //    public static void main(String[] args) {
 //        new Duke("data/duke.txt").run();
@@ -142,13 +138,23 @@ public class Duke extends Application {
             userInput.clear();
         });
 
+        greet();
+
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (DukeException e) {
+                e.printStackTrace();
+            }
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            try {
+                handleUserInput();
+            } catch (DukeException e) {
+                e.printStackTrace();
+            }
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -170,12 +176,20 @@ public class Duke extends Application {
         return textToAdd;
     }
 
+    private Label greet() {
+        // You will need to import `javafx.scene.control.Label`.
+        Label textToAdd = new Label("hello");
+        textToAdd.setWrapText(true);
+
+        return textToAdd;
+    }
+
     /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput() throws DukeException {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -189,7 +203,12 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) {
-        return "Duke heard: " + input;
+    String getResponse(String input) throws DukeException {
+//        return Parser.parseCommand(input, tasks);
+        if (input.equals("list")) {
+            return tasks.listTasks();
+        } else {
+            return ui.showErrorMsg();
+        }
     }
 }

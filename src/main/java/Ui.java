@@ -19,7 +19,7 @@ public class Ui {
     }
 
     public String showAddTaskMsg() {
-        return ("Got it. I've added this task: ");
+        return ("Got it. I've added this task: \n");
     }
 
     public String showRemoveTaskMsg() {
@@ -45,4 +45,6 @@ public class Ui {
     public String showFindTaskMsg() {
         return "Here are the matching tasks in your list: ";
     }
+
+    public String showErrorMsg() { return "Warning. Error.";}
 }
