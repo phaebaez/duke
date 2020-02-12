@@ -1,3 +1,5 @@
+import javafx.application.Platform;
+
 import java.util.ArrayList;
 
 /** Represents a parser that parses input string
@@ -26,26 +28,28 @@ public class Parser {
      * @param tasks is the current list of tasks before the modification
      * @return the arraylist of tasks after the modfication
      */
-    public static String parseCommand(String nextString, TaskList tasks) throws DukeException {
+    public static String parseCommand(String nextString, TaskList tasks, Storage storage) throws DukeException {
         Ui ui = new Ui();
-        if (nextString.equals("list")) {
+        if (nextString.equals("bye")) {
+            Platform.exit();
+        }else if (nextString.equals("list")) {
             return tasks.listTasks();
         } else if (nextString.contains("done")) {
-            return tasks.markComplete(nextString);
+            return tasks.markComplete(nextString, storage);
         } else if (nextString.contains("find")) {
             return tasks.findTask(nextString);
         } else if (nextString.contains("todo")) {
             counter++;
-            return tasks.addTodo(nextString);
+            return tasks.addTodo(nextString, storage);
         } else if (nextString.contains("deadline")) {
             counter++;
-            return tasks.addDeadline(nextString);
+            return tasks.addDeadline(nextString, storage);
         } else if (nextString.contains("event")) {
             counter++;
-            return tasks.addEvent(nextString);
+            return tasks.addEvent(nextString, storage);
         } else if (nextString.contains("delete")) {
             counter--;
-            return tasks.deleteTask(nextString);
+            return tasks.deleteTask(nextString, storage);
         } else {
             try {
                 throw new DukeException(ui.showWrongFormat());

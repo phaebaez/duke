@@ -1,5 +1,3 @@
-package duke;
-
 /** Represents the errors that can occur
  * when the Duke chatbot is running.
  */

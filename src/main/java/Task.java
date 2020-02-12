@@ -1,5 +1,3 @@
-package duke;
-
 /** Represents a task.
  */
 public class Task {

@@ -11,68 +11,29 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-/** Simulates a personal assistant chatbot.
- * called Duke that acts as a reminder
- *
+/**
+ * The Main class used to run the application.
+ * Creates the Ui, Storage and TaskList objects.
+ * Catches DukeExceptions and prints the error messages.
+ * Specifies the path to tasks.txt.
+ * Terminates when execute method of Command returns false.
  */
 public class Duke extends Application {
-    private static int counter = 0;
 
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private int counter = 0;
+    private Ui ui = new Ui();
+//    private Storage storage;
+//    private TaskList tasks;
+    private Storage storage = new Storage("data/duke.txt");
+    private TaskList tasks = new TaskList(storage.load(), counter);
+
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
-    /**
-     * Creates a new instance of Duke.
-     *
-     * @param filePath represents the file path
-     *                 of the file that is being read and written
-     */
-    public Duke(String filePath) {
-        ui = new Ui();
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.load(), storage.load().size());
-    }
-
-    public Duke() {
-
-    }
-
-    /**
-     * Runs the program.
-     */
-//    public void run() {
-//        ui.greet();
-//        ArrayList<Task> tasklist = storage.load();
-//        counter = tasklist.size();
-//        tasks = new TaskList(tasklist, counter);
-//
-//        Scanner scanner = new Scanner(System.in);
-//        Parser parser = new Parser(tasklist, counter);
-//        String nextString;
-//        while (scanner.hasNext()) {
-//            nextString = scanner.nextLine();
-//            if (nextString.equals("bye")) {
-//                System.out.println(ui.sayBye());
-//                break;
-//            } else {
-//                parser.parseCommand(nextString, tasks);
-//            }
-//        }
-//        storage.save(tasklist);
-//    }
-
-//    public static void main(String[] args) {
-//        new Duke("data/duke.txt").run();
-//    }
 
     @Override
     public void start(Stage stage) {
@@ -93,9 +54,6 @@ public class Duke extends Application {
 
         stage.setScene(scene);
         stage.show();
-        //Step 1. Formatting the window to look as expected.
-
-        //...
 
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Duke");
@@ -124,23 +82,12 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput, 1.0);
+        AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        //Step 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
-
-        userInput.setOnAction((event) -> {
-            dialogContainer.getChildren().add(getDialogLabel(userInput.getText()));
-            userInput.clear();
-        });
 
         greet();
 
-        //Part 3. Add functionality to handle user input.
+        //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             try {
                 handleUserInput();
@@ -159,12 +106,12 @@ public class Duke extends Application {
 
         //Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
+
     }
 
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
-     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -178,9 +125,15 @@ public class Duke extends Application {
 
     private Label greet() {
         // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label("hello");
-        textToAdd.setWrapText(true);
-
+//        String tempText = "Hello! This is Duke, your personal chatbot.";
+//        ArrayList<Task> temp = tasks.getTasks();
+//        for (Task t: temp) {
+//            tempText = tempText + "\n" + t.toString();
+//        }
+        Label textToAdd = new Label("Hello! This is Duke, your personal chatbot.");
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(textToAdd, new ImageView(duke))
+        );
         return textToAdd;
     }
 
@@ -203,12 +156,8 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    String getResponse(String input) throws DukeException {
-//        return Parser.parseCommand(input, tasks);
-        if (input.equals("list")) {
-            return tasks.listTasks();
-        } else {
-            return ui.showErrorMsg();
-        }
+    private String getResponse(String input) throws DukeException {
+        return Parser.parseCommand(input, tasks, storage);
     }
+
 }

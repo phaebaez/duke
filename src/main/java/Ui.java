@@ -1,5 +1,3 @@
-package duke;
-
 public class Ui {
     public void greet() {
         System.out.println("Hey, I'm Duke");
@@ -11,11 +9,11 @@ public class Ui {
     }
 
     public String showListMsg() {
-        return "Here are the tasks in your list: ";
+        return "Here are the tasks in your list: \n";
     }
 
     public String showDoneMsg() {
-        return "Nice! I've marked this task as done: ";
+        return "Nice! I've marked this task as done: \n";
     }
 
     public String showAddTaskMsg() {
@@ -27,24 +25,24 @@ public class Ui {
     }
 
     public String showCounterMsg(int counter) {
-        return ("Now you have " + counter + " tasks in your list.");
+        return ("Now you have " + counter + " tasks in your list. \n");
     }
 
     public String showEmptyTaskMsg() {
-        return "OOPS!!! The description cannot be empty :(";
+        return "OOPS!!! The description cannot be empty :( \n";
     }
 
     public String showWrongFormat() {
-        return "Did you mistype something?";
+        return "Did you mistype something? \n";
     }
 
     public String showNoMsgToDelete() {
-        return "Looks like there's no message to be deleted.";
+        return "Looks like there's no message to be deleted. \n";
     }
 
     public String showFindTaskMsg() {
-        return "Here are the matching tasks in your list: ";
+        return "Here are the matching tasks in your list: \n";
     }
 
-    public String showErrorMsg() { return "Warning. Error.";}
+    public String showErrorMsg() { return "Warning. Error. \n";}
 }

@@ -1,5 +1,3 @@
-package duke;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -28,7 +26,7 @@ public class TaskList {
      * @param nextString is the command entered by the user. Must contain
      *     the keyword 'todo' and a description of the task
      */
-    public String addTodo(String nextString) throws DukeException {
+    public String addTodo(String nextString, Storage storage) throws DukeException {
         Ui ui = new Ui();
         if (nextString.equals("todo")) {
             throw new DukeException(ui.showEmptyTaskMsg());
@@ -37,7 +35,8 @@ public class TaskList {
         Task task = new Todo(name);
         tasks.add(counter, task);
         counter++;
-        return ui.showAddTaskMsg() + "\t" + task.toString() + ui.showCounterMsg(counter);
+        storage.save(tasks);
+        return ui.showAddTaskMsg() + "\t" + task.toString() + "\n" + ui.showCounterMsg(counter);
     }
 
     /** Adds a task of type 'Deadline' to the list of tasks.
@@ -45,7 +44,7 @@ public class TaskList {
      *     the keyword 'deadline', a description of the task and the deadline
      *     of the task.
      */
-    public String addDeadline(String nextString) throws DukeException {
+    public String addDeadline(String nextString, Storage storage) throws DukeException {
         Ui ui = new Ui();
         if (nextString.equals("deadline")) {
             throw new DukeException(ui.showEmptyTaskMsg());
@@ -66,7 +65,9 @@ public class TaskList {
         tasks.add(counter, task);
         counter++;
 
-        return ui.showAddTaskMsg() + "\t" + task.toString() + ui.showCounterMsg(counter);
+        storage.save(tasks);
+
+        return ui.showAddTaskMsg() + "\t" + task.toString() + "\n" + ui.showCounterMsg(counter);
     }
 
     /** Adds a task of type 'Event' to the list of tasks.
@@ -74,7 +75,7 @@ public class TaskList {
      *     the keyword 'event', a description of the task and the date
      *     of the task.
      */
-    public String addEvent(String nextString) throws DukeException {
+    public String addEvent(String nextString, Storage storage) throws DukeException {
         Ui ui = new Ui();
         if (nextString.equals("event")) {
             throw new DukeException(ui.showEmptyTaskMsg());
@@ -95,14 +96,16 @@ public class TaskList {
 
         tasks.add(counter, task);
         counter++;
-        return ui.showAddTaskMsg() + "\t" + task.toString() + ui.showCounterMsg(counter);
+        storage.save(tasks);
+
+        return ui.showAddTaskMsg() + "\t" + task.toString() + "\n" + ui.showCounterMsg(counter);
     }
 
     /** Deletes a task from the list of tasks, given the index of a task.
      * @param nextString is the command entered by the user. Must contain
      *     the keyword 'delete' and the index of the task to be deleted.
      */
-    public String deleteTask(String nextString) throws DukeException {
+    public String deleteTask(String nextString, Storage storage) throws DukeException {
         Ui ui = new Ui();
         if (nextString.equals("delete")) {
             throw new DukeException(ui.showNoMsgToDelete());
@@ -113,20 +116,23 @@ public class TaskList {
         tasks.remove(index);
         counter--;
 
-        return ui.showRemoveTaskMsg() + current.toString() + ui.showCounterMsg(counter);
+        storage.save(tasks);
+        return ui.showRemoveTaskMsg() + current.toString() + "\n" + ui.showCounterMsg(counter);
     }
 
     /** Marks a task in the list of tasks as complete, given the index of the task.
      * @param nextString is the command entered by the user. Must contain
      *     the keyword 'done' and the index of the task.
      */
-    public String markComplete(String nextString) {
+    public String markComplete(String nextString, Storage storage) {
         Ui ui = new Ui();
 
         String[] temp = nextString.split(" ");
         int index = Integer.parseInt(temp[1]) - 1;
         Task current = tasks.get(index);
         current.setIsDone();
+
+        storage.save(tasks);
         return ui.showDoneMsg() + current.toString();
     }
 
@@ -143,7 +149,7 @@ public class TaskList {
         String toPrint = ui.showFindTaskMsg();
         for (Task t: tasks) {
             if (t.getDescription().contains(keyword)) {
-                toPrint = toPrint + (tasks.indexOf(t) + 1) + ". " + t.toString();
+                toPrint = toPrint + (tasks.indexOf(t) + 1) + ". " + t.toString() + "\n";
             }
         }
         return toPrint;
@@ -155,7 +161,7 @@ public class TaskList {
         Ui ui = new Ui();
         String temp = ui.showListMsg();
         for (Task t : tasks) {
-            temp = temp + (tasks.indexOf(t) + 1) + ". " + t.toString();
+            temp = temp + (tasks.indexOf(t) + 1) + ". " + t.toString() + "\n";
         }
         return temp;
     }
