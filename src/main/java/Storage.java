@@ -12,6 +12,10 @@ import java.util.ArrayList;
 public class Storage {
     private String filepath;
     private ArrayList<Task> tasks = new ArrayList<>();
+    private static ArrayList<Task> todoList = new ArrayList<>();
+    private static ArrayList<Task> deadlineList = new ArrayList<>();
+    private static ArrayList<Task> eventList = new ArrayList<>();
+    private static ArrayList<Task> doneList = new ArrayList<>();
     private int counter = 0;
 
     /** Creates a storage object which takes in the file path
@@ -33,34 +37,46 @@ public class Storage {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] temp = line.split(" - ");
-                if (temp[0].equals("T")) {
+                if (temp[0].contains("T")) {
                     Task task = new Todo(temp[2]);
+                    ((Todo) task).setTaskTodo();
+
+                    todoList.add(task);
                     tasks.add(counter, task);
                     counter++;
-                    if (Integer.parseInt(temp[1]) == 1) {
+                    if (temp[1].equals("\u2713")) {
                         task.setIsDone();
+                        doneList.add(task);
                     }
-                } else if (temp[0].equals("D")) {
+                } else if (temp[0].contains("D")) {
                     int day = Integer.parseInt(temp[3].split("-")[2]);
                     int month = Integer.parseInt(temp[3].split("-")[1]);
                     int year = Integer.parseInt(temp[3].split("-")[0]);
                     LocalDate date = LocalDate.of(year, month, day);
                     Task task = new Deadline(temp[2], date);
+                    ((Deadline) task).setTaskDeadline();
+
+                    deadlineList.add(task);
                     tasks.add(counter, task);
                     counter++;
-                    if (Integer.parseInt(temp[1]) == 1) {
+                    if (temp[1].equals("\u2713")) {
                         task.setIsDone();
+                        doneList.add(task);
                     }
-                } else if (temp[0].equals("E")) {
+                } else if (temp[0].contains("E")) {
                     int day = Integer.parseInt(temp[3].split("-")[2]);
                     int month = Integer.parseInt(temp[3].split("-")[1]);
                     int year = Integer.parseInt(temp[3].split("-")[0]);
                     LocalDate date = LocalDate.of(year, month, day);
                     Task task = new Event(temp[2], date);
+                    ((Event) task).setTaskEvent();
+
+                    eventList.add(task);
                     tasks.add(counter, task);
                     counter++;
-                    if (Integer.parseInt(temp[1]) == 1) {
+                    if (temp[1].equals("\u2713")) {
                         task.setIsDone();
+                        doneList.add(task);
                     }
                 }
             }
@@ -82,7 +98,7 @@ public class Storage {
             FileWriter fileWriter = new FileWriter(filepath, false);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-            String content = "";
+            String content = "\n";
             for (Task task : toSave) {
                 content = content + task.printToFile() + "\n";
             }
@@ -91,5 +107,21 @@ public class Storage {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public static ArrayList<Task> getTodoList() {
+        return todoList;
+    }
+
+    public static ArrayList<Task> getDeadlineList() {
+        return deadlineList;
+    }
+
+    public static ArrayList<Task> getEventList() {
+        return eventList;
+    }
+
+    public static ArrayList<Task> getDoneList() {
+        return doneList;
     }
 }

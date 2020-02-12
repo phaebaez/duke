@@ -1,14 +1,13 @@
 /** Represnts a task of type todo.
  */
 public class Todo extends Task {
-    private String by;
 
     /** Creates a task of type todo
      *     with the specified description.
      * @param description The description of the task.
      */
     public Todo(String description) {
-        super(description);
+        super(description, TaskType.Todo);
     }
 
     /** Produces string to be printed.
@@ -19,6 +18,10 @@ public class Todo extends Task {
         return "[T]" + super.toString();
     }
 
+    public void setTaskTodo() {
+        taskType = TaskType.Todo;
+    }
+
     /** Prints the string representation of the
      *     task that is to be saved in the file.
      * @return a string representation of the
@@ -26,6 +29,6 @@ public class Todo extends Task {
      */
     @Override
     public String printToFile() {
-        return "T" + super.printToFile();
+        return "[T]" + super.printToFile();
     }
 }

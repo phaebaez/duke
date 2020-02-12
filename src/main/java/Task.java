@@ -3,14 +3,16 @@
 public class Task {
     private String description;
     private boolean isDone;
+    TaskType taskType;
 
     /** Creates a task of with
      * the specified description and end date.
      * @param description The description of the task.
      */
-    public Task(String description) {
+    public Task(String description, TaskType type) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
+        this.taskType = type;
     }
 
     /** Gets the current status of the task.
@@ -35,6 +37,10 @@ public class Task {
         return description;
     }
 
+    public TaskType getTaskType() {
+        return taskType;
+    }
+
     /**Produces string to be printed.
      * @return a string that represents the task.
      */
@@ -48,6 +54,6 @@ public class Task {
      *     task to be saved in the file.
      */
     public String printToFile() {
-        return " - " + getStatusIcon() + " " + description;
+        return " - " + getStatusIcon() + " - " + description;
     }
 }

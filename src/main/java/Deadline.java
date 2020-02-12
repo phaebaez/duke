@@ -4,7 +4,6 @@ import java.time.format.DateTimeFormatter;
 /** Represents a task of type deadline.
  */
 public class Deadline extends Task {
-
     private LocalDate by;
 
     /** Creates a task of type deaedline with
@@ -13,7 +12,7 @@ public class Deadline extends Task {
      * @param by is the date that the task needs to be completed by.
      */
     public Deadline(String description, LocalDate by) {
-        super(description);
+        super(description, TaskType.Deadline);
         this.by = by;
     }
 
@@ -25,12 +24,16 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    public void setTaskDeadline() {
+        taskType = TaskType.Deadline;
+    }
+
     /** Prints the string representation of the
      * task that is to be saved in the file.
      * @return a string representation of the task to be saved in the file.
      */
     @Override
     public String printToFile() {
-        return "D" + super.printToFile() + " - " + by;
+        return "[D]" + super.printToFile() + " - " + by;
     }
 }

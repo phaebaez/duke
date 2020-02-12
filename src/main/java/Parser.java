@@ -32,30 +32,34 @@ public class Parser {
         Ui ui = new Ui();
         if (nextString.equals("bye")) {
             Platform.exit();
-        }else if (nextString.equals("list")) {
+        }else if (nextString.trim().equals("list")) {
             assert counter > 0 : "You can't get a list of tasks if you don't have anything in it!";
             return tasks.listTasks();
-        } else if (nextString.contains("done")) {
+        } else if (nextString.trim().substring(0,4).contains("done")) {
             assert counter > 0 : "You need to have a task to complete it!";
             return tasks.markComplete(nextString, storage);
-        } else if (nextString.contains("find")) {
+        } else if (nextString.trim().substring(0,4).contains("find")) {
             return tasks.findTask(nextString);
-        } else if (nextString.contains("todo")) {
+        } else if (nextString.trim().substring(0,4).contains("todo")) {
             assert nextString.length() > 5 : "You can't just set a todo if you don't have one!";
             counter++;
             return tasks.addTodo(nextString, storage);
-        } else if (nextString.contains("deadline")) {
+        } else if (nextString.trim().substring(0,8).contains("deadline")) {
             assert nextString.length() > 9 : "You can't just set a deadline if you don't have one!";
             counter++;
             return tasks.addDeadline(nextString, storage);
-        } else if (nextString.contains("event")) {
+        } else if (nextString.trim().substring(0,5).contains("event")) {
             assert nextString.length() > 6 : "You can't just set an event if you don't have one!";
             counter++;
             return tasks.addEvent(nextString, storage);
-        } else if (nextString.contains("delete")) {
+        } else if (nextString.trim().substring(0, 6).contains("delete")) {
             assert counter > 0 : "You need to have a task to delete it!";
             counter--;
             return tasks.deleteTask(nextString, storage);
+        } else if (nextString.trim().substring(0, 6).contains("filter")) {
+            return tasks.filterType(nextString);
+        } else if (nextString.trim().substring(0,7).contains("percent")) {
+            return tasks.calculatePercent(nextString);
         } else {
             try {
                 throw new DukeException(ui.showWrongFormat());

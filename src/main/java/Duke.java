@@ -134,6 +134,7 @@ public class Duke extends Application {
         ArrayList<Task> temp = storage.load();
         counter = temp.size();
         tasks = new TaskList(temp, counter);
+
         Label textToAdd = new Label("Hello! This is Duke, your personal chatbot.");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(textToAdd, new ImageView(duke))
@@ -163,5 +164,4 @@ public class Duke extends Application {
     private String getResponse(String input) throws DukeException {
         return Parser.parseCommand(input, tasks, storage);
     }
-
 }

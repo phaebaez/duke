@@ -12,7 +12,7 @@ public class Event extends Task {
      * @param dateTime is the date that the event occurs.
      */
     public Event(String description, LocalDate dateTime) {
-        super(description);
+        super(description, TaskType.Event);
         this.dateTime = dateTime;
     }
 
@@ -24,6 +24,10 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    public void setTaskEvent() {
+        taskType = TaskType.Event;
+    }
+
     /** Prints the string representation of the
      * task that is to be saved in the file.
      * @return a string representation of the
@@ -31,7 +35,7 @@ public class Event extends Task {
      */
     @Override
     public String printToFile() {
-        return "E" + super.printToFile() + " - " + dateTime;
+        return "[E]" + super.printToFile() + " - " + dateTime;
     }
 }
 

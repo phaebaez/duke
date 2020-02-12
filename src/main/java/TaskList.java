@@ -6,6 +6,10 @@ import java.util.ArrayList;
 public class TaskList {
     private ArrayList<Task> tasks;
     private int counter;
+    private ArrayList<Task> todoList = Storage.getTodoList();
+    private ArrayList<Task> deadlineList = Storage.getDeadlineList();
+    private ArrayList<Task> eventList = Storage.getEventList();
+    private ArrayList<Task> doneList = Storage.getDoneList();
 
     /** Creates a list of tasks which takes in a list containing
      *     all the tasks that have been added or were already in the list
@@ -33,6 +37,9 @@ public class TaskList {
         }
         String name = nextString.substring(5);
         Task task = new Todo(name);
+
+        todoList.add(task);
+
         tasks.add(counter, task);
         counter++;
         storage.save(tasks);
@@ -61,6 +68,8 @@ public class TaskList {
         int year = Integer.parseInt(tempDate[0].split("/")[2]);
         LocalDate date = LocalDate.of(year, month, day);
         Task task = new Deadline(taskName, date);
+
+        deadlineList.add(task);
 
         tasks.add(counter, task);
         counter++;
@@ -94,6 +103,8 @@ public class TaskList {
         LocalDate date = LocalDate.of(year, month, day);
         Task task = new Event(taskName, date);
 
+        eventList.add(task);
+
         tasks.add(counter, task);
         counter++;
         storage.save(tasks);
@@ -113,6 +124,15 @@ public class TaskList {
         String[] temp = nextString.split(" ");
         int index = Integer.parseInt(temp[1]) - 1;
         Task current = tasks.get(index);
+
+        if (current instanceof Todo) {
+            storage.getTodoList().remove(current);
+        } else if (current instanceof Deadline) {
+            storage.getDeadlineList().remove(current);
+        } else if (current instanceof Event) {
+            storage.getEventList().remove(current);
+        }
+
         tasks.remove(index);
         counter--;
 
@@ -167,5 +187,47 @@ public class TaskList {
             temp = temp + (tasks.indexOf(t) + 1) + ". " + t.toString() + "\n";
         }
         return temp;
+    }
+
+    public String filterType(String input) {
+        Ui ui = new Ui();
+        String type = input.split(" ")[1];
+        String toPrint = ui.showFindTaskMsg();
+
+        if (type.equals("todo")) {
+            for (Task t: todoList) {
+                toPrint = toPrint + (tasks.indexOf(t) + 1) + ". " + t.toString() + "\n";
+            }
+        } else if (type.equals("deadline")) {
+            for (Task t: deadlineList) {
+                toPrint = toPrint + (tasks.indexOf(t) + 1) + ". " + t.toString() + "\n";
+            }
+        } else if (type.equals("event")) {
+            for (Task t: eventList) {
+                toPrint = toPrint + (tasks.indexOf(t) + 1) + ". " + t.toString() + "\n";
+            }
+        }
+
+        assert counter > 0 : "You can't find a task on the list if it's not even on it!";
+        return toPrint;
+    }
+
+    public String calculatePercent(String input) {
+        double num = 0;
+        String statsFor = input.split(" ")[1];
+
+        if (statsFor.equals("todo")) {
+            num = todoList.size();
+        } else if (statsFor.equals("deadline")) {
+            num = deadlineList.size();
+        } else if (statsFor.equals("event")) {
+            num = eventList.size();
+        } else if (statsFor.equals("done")) {
+            num = doneList.size();
+        }
+
+        double totalNum = tasks.size();
+
+        return "Percentage of tasks that are Todos is: " + (num / totalNum);
     }
 }
