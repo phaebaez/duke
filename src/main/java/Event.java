@@ -24,7 +24,7 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
-    public void setTaskEvent() {
+    public void setEvent() {
         taskType = TaskType.Event;
     }
 
@@ -34,8 +34,8 @@ public class Event extends Task {
      *     task to be saved in the file.
      */
     @Override
-    public String printToFile() {
-        return "[E]" + super.printToFile() + " - " + dateTime;
+    public String saveToFile() {
+        return "[E]" + super.saveToFile() + " - " + dateTime;
     }
 }
 

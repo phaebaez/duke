@@ -24,7 +24,7 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
-    public void setTaskDeadline() {
+    public void setDeadline() {
         taskType = TaskType.Deadline;
     }
 
@@ -33,7 +33,7 @@ public class Deadline extends Task {
      * @return a string representation of the task to be saved in the file.
      */
     @Override
-    public String printToFile() {
-        return "[D]" + super.printToFile() + " - " + by;
+    public String saveToFile() {
+        return "[D]" + super.saveToFile() + " - " + by;
     }
 }

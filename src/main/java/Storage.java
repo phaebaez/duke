@@ -54,7 +54,7 @@ public class Storage {
                     int year = Integer.parseInt(temp[3].split("-")[0]);
                     LocalDate date = LocalDate.of(year, month, day);
                     Task task = new Deadline(temp[2], date);
-                    ((Deadline) task).setTaskDeadline();
+                    ((Deadline) task).setDeadline();
 
                     deadlineList.add(task);
                     tasks.add(counter, task);
@@ -69,7 +69,7 @@ public class Storage {
                     int year = Integer.parseInt(temp[3].split("-")[0]);
                     LocalDate date = LocalDate.of(year, month, day);
                     Task task = new Event(temp[2], date);
-                    ((Event) task).setTaskEvent();
+                    ((Event) task).setEvent();
 
                     eventList.add(task);
                     tasks.add(counter, task);
@@ -100,7 +100,7 @@ public class Storage {
 
             String content = "\n";
             for (Task task : toSave) {
-                content = content + task.printToFile() + "\n";
+                content = content + task.saveToFile() + "\n";
             }
             bufferedWriter.write(content);
             bufferedWriter.close();

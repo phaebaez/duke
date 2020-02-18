@@ -53,7 +53,7 @@ public class Task {
      * @return a string representation of the
      *     task to be saved in the file.
      */
-    public String printToFile() {
+    public String saveToFile() {
         return " - " + getStatusIcon() + " - " + description;
     }
 }

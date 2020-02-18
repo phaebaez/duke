@@ -28,7 +28,7 @@ public class Todo extends Task {
      *     task to be saved in the file.
      */
     @Override
-    public String printToFile() {
-        return "[T]" + super.printToFile();
+    public String saveToFile() {
+        return "[T]" + super.saveToFile();
     }
 }
