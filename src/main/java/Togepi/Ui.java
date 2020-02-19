@@ -1,3 +1,5 @@
+package Togepi;
+
 public class Ui {
 
     /** Produces the greeting message.

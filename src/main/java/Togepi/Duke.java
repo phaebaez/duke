@@ -1,3 +1,7 @@
+package Togepi;
+
+import Togepi.Tasks.Task;
+import Togepi.Tasks.TaskList;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -15,7 +19,7 @@ import java.util.ArrayList;
 
 /**
  * The Main class used to run the application.
- * Creates the Ui, Storage and TaskList objects.
+ * Creates the Togepi.Ui, Togepi.Storage and Togepi.Tasks.TaskList objects.
  * Catches DukeExceptions and prints the error messages.
  * Specifies the path to Togepi.txt.
  * Terminates when execute method of Command returns false.
@@ -34,7 +38,7 @@ public class Duke extends Application {
     private int counter;
     private TaskList tasks;
 
-//    public Duke() {
+//    public Togepi.Duke() {
 //
 //    }
 
@@ -62,7 +66,7 @@ public class Duke extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Togepi.Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -146,7 +150,7 @@ public class Duke extends Application {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Togepi.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() throws DukeException {

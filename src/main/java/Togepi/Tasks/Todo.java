@@ -1,3 +1,5 @@
+package Togepi.Tasks;
+
 /** Represents a task of type todo.
  */
 public class Todo extends Task {

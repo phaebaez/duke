@@ -1,18 +1,21 @@
+package Togepi.Tasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/** Represents a task of type event.
+/** Represents a task of type deadline.
  */
-public class Event extends Task {
-    private LocalDate dateTime;
+public class Deadline extends Task {
+    private LocalDate by;
 
-    /** Creates a task of type event with the specified description and the date of the event.
+    /** Creates a task of type deaedline with
+     * the specified description and end date.
      * @param description is the description of the task.
-     * @param dateTime is the date that the event occurs.
+     * @param by is the date that the task needs to be completed by.
      */
-    public Event(String description, LocalDate dateTime) {
+    public Deadline(String description, LocalDate by) {
         super(description);
-        this.dateTime = dateTime;
+        this.by = by;
     }
 
     /** Produces string to be printed.
@@ -20,7 +23,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     /** Prints the string representation of the task that is to be saved in the file.
@@ -28,7 +31,6 @@ public class Event extends Task {
      */
     @Override
     public String saveToFile() {
-        return "[E]" + super.saveToFile() + " - " + dateTime;
+        return "[D]" + super.saveToFile() + " - " + by;
     }
 }
-

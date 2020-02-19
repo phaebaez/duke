@@ -1,3 +1,9 @@
+package Togepi.Tasks;
+
+import Togepi.DukeException;
+import Togepi.Storage;
+import Togepi.Ui;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -25,11 +31,11 @@ public class TaskList {
 //    /** Gets the list of tasks
 //     * @return an arraylist of the tasks.
 //     */
-//    public ArrayList<Task> getTasks() {
+//    public ArrayList<Togepi.Tasks.Task> getTasks() {
 //        return tasks;
 //    }
 
-    /** Adds a task of type 'Todo' to the list of tasks.
+    /** Adds a task of type 'Togepi.Tasks.Todo' to the list of tasks.
      * @param nextString is the command entered by the user. Must contain
      *     the keyword 'todo' and a description of the task
      */
@@ -49,7 +55,7 @@ public class TaskList {
         return ui.showAddTaskMsg() + "\t" + task.toString() + "\n" + ui.showCounterMsg(counter);
     }
 
-    /** Adds a task of type 'Deadline' to the list of tasks.
+    /** Adds a task of type 'Togepi.Tasks.Deadline' to the list of tasks.
      * @param nextString is the command entered by the user. Must contain
      *     the keyword 'deadline', a description of the task and the deadline
      *     of the task.
@@ -80,7 +86,7 @@ public class TaskList {
         return ui.showAddTaskMsg() + "\t" + task.toString() + "\n" + ui.showCounterMsg(counter);
     }
 
-    /** Adds a task of type 'Event' to the list of tasks.
+    /** Adds a task of type 'Togepi.Tasks.Event' to the list of tasks.
      * @param nextString is the command entered by the user. Must contain
      *     the keyword 'event', a description of the task and the date
      *     of the task.

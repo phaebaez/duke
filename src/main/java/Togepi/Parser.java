@@ -1,3 +1,7 @@
+package Togepi;
+
+import Togepi.Tasks.Task;
+import Togepi.Tasks.TaskList;
 import javafx.application.Platform;
 
 import java.util.ArrayList;

@@ -1,3 +1,10 @@
+package Togepi;
+
+import Togepi.Tasks.Deadline;
+import Togepi.Tasks.Event;
+import Togepi.Tasks.Task;
+import Togepi.Tasks.Todo;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;

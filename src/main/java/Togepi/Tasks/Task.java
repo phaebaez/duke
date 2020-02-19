@@ -1,3 +1,5 @@
+package Togepi.Tasks;
+
 /** Represents a task.
  */
 public class Task {
