@@ -1,6 +1,9 @@
-import duke.Task;
-import duke.TaskList;
-import duke.Todo;
+import Togepi.Tasks.Task;
+import Togepi.Tasks.TaskList;
+import Togepi.Tasks.Todo;
+import Togepi.Task;
+import Togepi.TaskList;
+import Togepi.Todo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

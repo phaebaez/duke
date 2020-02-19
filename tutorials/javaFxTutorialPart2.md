@@ -34,7 +34,7 @@ But how do we get the exact layout we want in the UI? JavaFX provides that funct
 
 One way to obtain the layout in the mockup is as follows. 
 
-![Duke's layout](assets/DukeSceneGraph.png) 
+![Duke's layout](assets/DukeSceneGraph.png)
 
 To get that layout, we create a new `AnchorPane` and add our controls to it. Similarly, we create a new `VBox` to hold the contents of the `ScrollPane`. The code should look something like this:
 

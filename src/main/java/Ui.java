@@ -1,48 +1,76 @@
 public class Ui {
-    public void greet() {
-        System.out.println("Hey, I'm Duke");
-        System.out.println("What's up");
+
+    /** Produces the greeting message.
+     * @return a string of the greeting message.
+     */
+    public String greet() {
+        return "Pii! Do you need Togepi for something? \n" +
+                "Type 'help' for my list of commands!";
     }
 
-    public String sayBye() {
-        return "Bye.";
-    }
-
+    /** Produces the list message.
+     * @return a string that lists all the current tasks.
+     */
     public String showListMsg() {
-        return "Here are the tasks in your list: \n";
+        return "Togepi discovered: \n";
     }
 
+    /** Produces the done message.
+     * @return a string that shows the task has been completed.
+     */
     public String showDoneMsg() {
-        return "Nice! I've marked this task as done: \n";
+        return "Togepi used Metronome! It's super effective \n";
     }
 
+    /** Produces the add task message.
+     * @return a string that shows the task has been added.
+     */
     public String showAddTaskMsg() {
-        return ("Got it. I've added this task: \n");
+        return "Togepi found something and added it to her storage: \n";
     }
 
+    /** Produces the remove message.
+     * @return a string that shows the task has been removed.
+     */
     public String showRemoveTaskMsg() {
-        return ("Noted! I've removed this task: ");
+        return "The opponent has fainted. ";
     }
 
+    /** Produces the counter message.
+     * @return a string that shows the number of tasks in the lists.
+     */
     public String showCounterMsg(int counter) {
-        return ("Now you have " + counter + " tasks in your list. \n");
+        return "Now you have " + counter + " tasks in your list. \n";
     }
 
-    public String showEmptyTaskMsg() {
-        return "OOPS!!! The description cannot be empty :( \n";
-    }
-
-    public String showWrongFormat() {
-        return "Did you mistype something? \n";
-    }
-
-    public String showNoMsgToDelete() {
-        return "Looks like there's no message to be deleted. \n";
-    }
-
+    /** Produces the find task message.
+     * @return a string that shows all the tasks that contains the keyword.
+     */
     public String showFindTaskMsg() {
-        return "Here are the matching tasks in your list: \n";
+        return "Togepi has found: \n";
     }
 
-    public String showErrorMsg() { return "Warning. Error. \n";}
+    /** Produces the error message.
+     * @return a string that shows the error message.
+     */
+    public String showErrorMsg() {
+        return "Togepi is confused. \n";
+    }
+
+    /** Produces the help message.
+     * @return a string that shows the list of available commands.
+     */
+    public String showHelp() {
+        return "Togepi's moves: \n" +
+                "list: show current list of tasks \n" +
+                "done: mark a specific task as complete \n" +
+                "find (keyword): filter list of tasks to find any tasks that contains the keyword \n" +
+                "todo (name): create a new todo task \n" +
+                "deadline (name) /by (dd-mm-yyyy): create a new deadline task \n" +
+                "event (name) /at (dd-mm-yyyy): create a new event task \n" +
+                "delete (index): deletes the task at that index \n" +
+                "filter (todo/deadline/event): filter list of tasks by task type \n" +
+                "percent (todo/deadline/event/done: returns the percentage of the tasks based on the second half of the input \n" +
+                "help: display all the available commands \n";
+    }
 }

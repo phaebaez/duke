@@ -6,7 +6,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
-group 'seedu.duke'
+group 'seedu.Togepi'
 version '0.1.0'
 
 dependencies {
@@ -43,7 +43,7 @@ checkstyle {
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "Togepi"
     archiveVersion = "0.1.3"
     archiveClassifier = null
     archiveAppendix = null

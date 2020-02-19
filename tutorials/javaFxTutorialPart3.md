@@ -115,7 +115,7 @@ Image|Filename
 public class Duke extends Application {
     // ...
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image Togepi = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     // ...
 }
 ```
@@ -132,7 +132,7 @@ private void handleUserInput() {
     Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
             new DialogBox(userText, new ImageView(user)),
-            new DialogBox(dukeText, new ImageView(duke))
+            new DialogBox(dukeText, new ImageView(Togepi))
     );
     userInput.clear();
 }
@@ -205,7 +205,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 ```
 
-Now, we can go back to the `Main` class and change the event handler to use our new `DialogBox`. 
+Now, we can go back to the `Main` class and change the event handler to use our new `DialogBox`.
 
 ```java
 private void handleUserInput() {
@@ -213,7 +213,7 @@ private void handleUserInput() {
     Label dukeText = new Label(getResponse(userInput.getText()));
     dialogContainer.getChildren().addAll(
             DialogBox.getUserDialog(userText, new ImageView(user)),
-            DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+            DialogBox.getDukeDialog(dukeText, new ImageView(Togepi))
     );
     userInput.clear();
 }
@@ -224,7 +224,7 @@ Run the application and play around with it.
 ![DialogBoxes Iteration 3](assets/DialogBoxesIteration3.png)
 
 Congratulations! 
-You have successfully implemented a fully functional GUI for Duke!  
+You have successfully implemented a fully functional GUI for Duke!
 
 ## Exercises
 

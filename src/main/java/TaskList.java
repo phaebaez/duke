@@ -22,9 +22,12 @@ public class TaskList {
         this.counter = counter;
     }
 
-    public ArrayList<Task> getTasks() {
-        return tasks;
-    }
+//    /** Gets the list of tasks
+//     * @return an arraylist of the tasks.
+//     */
+//    public ArrayList<Task> getTasks() {
+//        return tasks;
+//    }
 
     /** Adds a task of type 'Todo' to the list of tasks.
      * @param nextString is the command entered by the user. Must contain
@@ -33,7 +36,7 @@ public class TaskList {
     public String addTodo(String nextString, Storage storage) throws DukeException {
         Ui ui = new Ui();
         if (nextString.equals("todo")) {
-            throw new DukeException(ui.showEmptyTaskMsg());
+            throw new DukeException(ui.showErrorMsg());
         }
         String name = nextString.substring(5);
         Task task = new Todo(name);
@@ -53,10 +56,8 @@ public class TaskList {
      */
     public String addDeadline(String nextString, Storage storage) throws DukeException {
         Ui ui = new Ui();
-        if (nextString.equals("deadline")) {
-            throw new DukeException(ui.showEmptyTaskMsg());
-        } else if (!nextString.contains("/by")) {
-            throw new DukeException(ui.showWrongFormat());
+        if (nextString.equals("deadline") || !nextString.contains("/by")) {
+            throw new DukeException(ui.showErrorMsg());
         }
 
         String name = nextString.substring(9);
@@ -86,11 +87,10 @@ public class TaskList {
      */
     public String addEvent(String nextString, Storage storage) throws DukeException {
         Ui ui = new Ui();
-        if (nextString.equals("event")) {
-            throw new DukeException(ui.showEmptyTaskMsg());
-        } else if (!nextString.contains("/at")) {
-            throw new DukeException(ui.showWrongFormat());
+        if (nextString.equals("event") || !nextString.contains("/at")) {
+            throw new DukeException(ui.showErrorMsg());
         }
+
         String name = nextString.substring(5);
 
         String taskName = name.split(" /at ")[0];
@@ -119,7 +119,7 @@ public class TaskList {
     public String deleteTask(String nextString, Storage storage) throws DukeException {
         Ui ui = new Ui();
         if (nextString.equals("delete")) {
-            throw new DukeException(ui.showNoMsgToDelete());
+            throw new DukeException(ui.showErrorMsg());
         }
         String[] temp = nextString.split(" ");
         int index = Integer.parseInt(temp[1]) - 1;
@@ -179,6 +179,7 @@ public class TaskList {
     }
 
     /** Lists all the tasks in the list of tasks.
+     * @return a string message that shows the list of tasks
      */
     public String listTasks() {
         Ui ui = new Ui();
@@ -189,6 +190,10 @@ public class TaskList {
         return temp;
     }
 
+    /** Lists all the tasks of a specific type.
+     * @param input contains the command and the type of task.
+     * @return a strig that shows the list of filtered tasks.
+     */
     public String filterType(String input) {
         Ui ui = new Ui();
         String type = input.split(" ")[1];
@@ -212,22 +217,29 @@ public class TaskList {
         return toPrint;
     }
 
+    /** Calculates the percentage of the tasks of a specific type.
+     * @param input represents a string that contains the command and the type of task.
+     * @return a string that shows the percentage of the tasks of that type.
+     */
     public String calculatePercent(String input) {
-        double num = 0;
+        double num;
+        double totalNum = tasks.size();
         String statsFor = input.split(" ")[1];
+        Ui ui = new Ui();
 
         if (statsFor.equals("todo")) {
             num = todoList.size();
+            return "Percentage of tasks that are Todos is: " + (num / totalNum);
         } else if (statsFor.equals("deadline")) {
             num = deadlineList.size();
+            return "Percentage of tasks that are Deadlines is: " + (num / totalNum);
         } else if (statsFor.equals("event")) {
             num = eventList.size();
+            return "Percentage of tasks that are Events is: " + (num / totalNum);
         } else if (statsFor.equals("done")) {
             num = doneList.size();
+            return "Percentage of tasks that are Done is: " + (num / totalNum);
         }
-
-        double totalNum = tasks.size();
-
-        return "Percentage of tasks that are Todos is: " + (num / totalNum);
+        return ui.showErrorMsg();
     }
 }

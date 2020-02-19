@@ -17,18 +17,14 @@ import java.util.ArrayList;
  * The Main class used to run the application.
  * Creates the Ui, Storage and TaskList objects.
  * Catches DukeExceptions and prints the error messages.
- * Specifies the path to tasks.txt.
+ * Specifies the path to Togepi.txt.
  * Terminates when execute method of Command returns false.
  */
 public class Duke extends Application {
-
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/Ash.png"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Togepi.png"));
     private Ui ui = new Ui();
-//    private Storage storage;
-//    private TaskList tasks;
-    private Storage storage = new Storage("data/duke.txt");
-
+    private Storage storage = new Storage("data/Togepi.txt");
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
@@ -42,6 +38,9 @@ public class Duke extends Application {
 //
 //    }
 
+    /** Sets up the application.
+     * @param stage represents the display.
+     */
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -130,12 +129,15 @@ public class Duke extends Application {
         return textToAdd;
     }
 
+    /** Greets the user.
+     * @return a Label containing the user's greeting.
+     */
     private Label greet() {
         ArrayList<Task> temp = storage.load();
         counter = temp.size();
         tasks = new TaskList(temp, counter);
 
-        Label textToAdd = new Label("Hello! This is Duke, your personal chatbot.");
+        Label textToAdd = new Label(ui.greet());
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(textToAdd, new ImageView(duke))
         );
@@ -157,9 +159,9 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+    /** Gets Togepi's response to the user.
+     * @param input represents the command that Togepi listens to.
+     * @return a string containing Togepi's response.
      */
     private String getResponse(String input) throws DukeException {
         return Parser.parseCommand(input, tasks, storage);

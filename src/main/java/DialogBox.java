@@ -6,6 +6,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * The class that creates the dialog boxes in the application.
+ * Creates the Label and Imageview objects.
+ */
 public class DialogBox extends HBox {
 
     private Label text;
@@ -33,12 +37,12 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+    public static DialogBox getUserDialog(Label label, ImageView imageView) {
+        return new DialogBox(label, imageView);
     }
 
-    public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+    public static DialogBox getDukeDialog(Label label, ImageView imageView) {
+        var db = new DialogBox(label, imageView);
         db.flip();
         return db;
     }

@@ -9,7 +9,7 @@ While we have produced a fully functional prototype, there are a few major probl
    Every small change requires us to rebuild and run the application.  
 
 1. Components are heavily dependent on each other:
-   Why does `Main` need to know that `DialogBox` needs a `Label`? 
+   Why does `Main` need to know that `DialogBox` needs a `Label`?
    What happens if we change the `Label` to a custom `ColoredLabel` in the future?  
     
     We need to minimize the amount of information each control needs to know about another.
@@ -95,7 +95,7 @@ We will get to that later.
    ![Controller for MainWindow](assets/MainWindowController.png)
 
 1. Let’s repeat the process for `DialogBox`.
-   The main difference here is that DialogBox checks `Use fx:root construct` and _does not define a controller class_. 
+   The main difference here is that DialogBox checks `Use fx:root construct` and _does not define a controller class_.
 
    ![Settings for DialogBox](assets/DialogBoxController.png)
 
@@ -128,7 +128,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Duke Togepi;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
@@ -139,7 +139,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
-        duke = d;
+        Togepi = d;
     }
 
     /**
@@ -149,7 +149,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = Togepi.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -186,7 +186,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke Togepi = new Duke();
 
     @Override
     public void start(Stage stage) {
@@ -195,7 +195,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setDuke(Togepi);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -271,7 +271,7 @@ public class DialogBox extends HBox {
 }
 ```
 
-When we create a new instance of `DialogBox`, we set both the controller and root Node to `DialogBox`. 
+When we create a new instance of `DialogBox`, we set both the controller and root Node to `DialogBox`.
 From this point onwards we can interact with `DialogBox` as we have in the previous tutorials.
 
 The last change that we have to make is to point our `Launcher` class in the right direction:

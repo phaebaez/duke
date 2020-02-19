@@ -32,9 +32,11 @@ public class Parser {
         Ui ui = new Ui();
         if (nextString.equals("bye")) {
             Platform.exit();
-        }else if (nextString.trim().equals("list")) {
+        } else if (nextString.trim().equals("list")) {
             assert counter > 0 : "You can't get a list of tasks if you don't have anything in it!";
             return tasks.listTasks();
+        } else if (nextString.trim().equals("help")) {
+            return ui.showHelp();
         } else if (nextString.trim().substring(0,4).contains("done")) {
             assert counter > 0 : "You need to have a task to complete it!";
             return tasks.markComplete(nextString, storage);
@@ -60,12 +62,6 @@ public class Parser {
             return tasks.filterType(nextString);
         } else if (nextString.trim().substring(0,7).contains("percent")) {
             return tasks.calculatePercent(nextString);
-        } else {
-            try {
-                throw new DukeException(ui.showWrongFormat());
-            } catch (DukeException e) {
-                e.printStackTrace();
-            }
         }
         return ui.showErrorMsg();
     }

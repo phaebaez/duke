@@ -12,7 +12,7 @@ public class Deadline extends Task {
      * @param by is the date that the task needs to be completed by.
      */
     public Deadline(String description, LocalDate by) {
-        super(description, TaskType.Deadline);
+        super(description);
         this.by = by;
     }
 
@@ -24,12 +24,7 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
-    public void setDeadline() {
-        taskType = TaskType.Deadline;
-    }
-
-    /** Prints the string representation of the
-     * task that is to be saved in the file.
+    /** Prints the string representation of the task that is to be saved in the file.
      * @return a string representation of the task to be saved in the file.
      */
     @Override
