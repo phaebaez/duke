@@ -5,20 +5,20 @@
 ### Feature 1 
 Able to add tasks of various types 
 
-## Usage
+### Usage
 For the user to add tasks that the user needs **todo**, tasks that needs to be completed by a certain **deadline**, or **events** that the user needs to attend on a certain date. 
 
-### `Keyword` - Describe action
+#### `Keyword` - Describe action
 * '***todo***' allows users to add todos. 
 
 * '***deadline***' allows users to add deadlines.
 
 * '***event***' allows users to add events.
 
-### Describe action and its outcome.
+#### Describe action and its outcome.
 Adding **todos/deadline/events** will appear in the user's list of tasks. A message should appear to confirm that the task has been added. If the user is still uncertain, the user can check by using the command '*list*' to see if the task has been added. 
 
-### Example of usage: 
+#### Example of usage: 
 `keyword (optional arguments)`
 
 * ***todo** study math*
