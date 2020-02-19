@@ -28,7 +28,7 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/Ash.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Togepi.png"));
     private Ui ui = new Ui();
-    private Storage storage = new Storage("data/Togepi.txt");
+    private Storage storage = new Storage("data/duke.txt");
 
     private ScrollPane scrollPane;
     private VBox dialogContainer;
