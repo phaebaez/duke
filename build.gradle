@@ -6,13 +6,11 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
-group 'seedu.Togepi'
+group 'seedu.duke'
 version '0.1.0'
 
 dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0'
-
-        String javaFxVersion = '11'
+    String javaFxVersion = '11'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'mac'
@@ -28,22 +26,17 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
+
 repositories {
     mavenCentral()
 }
-
-javafx {
-    version = "11.0.2"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
-}
-
 
 checkstyle {
     toolVersion = "8.23"
 }
 
 shadowJar {
-    archiveBaseName = "Togepi"
+    archiveBaseName = "duke"
     archiveVersion = "0.2"
     archiveClassifier = null
     archiveAppendix = null
@@ -58,6 +51,11 @@ test {
     useJUnitPlatform()
 }
 
+jar {
+  manifest {
+   attributes 'Main-Class': 'Launcher'
+  }
+}
 
 run {
     standardInput = System.in
