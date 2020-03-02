@@ -2,13 +2,13 @@
 
 ## 1. Introduction
 
-Personal Assistant Togepi (PAT) is for those who *prefer to use a desktop app for managing your tasks*. More importantly, PAT is *optimized for those who prefer to work with a Command Line Interface* (CLI), so if you can type fast, PAT can get your manage your tasks faster than traditional GUI apps. Interested? Jump to the **Quick Start** to get started. Enjoy!
+Personal Assistant Togepi (PAT) is for those who *prefer to use a desktop app for managing your tasks*. More importantly, PAT is *optimized for those who prefer to work with a Command Line Interface* (CLI), so if you can type fast, PAT can get your manage your tasks faster than traditional GUI apps.
 
 ## 2. Quick Start
 
 2.1 Ensure you have Java `11` or above installed in your Computer.
 
-2.2 Download the latest `duke-0.2.jar` [here](https://github.com/phaebaez/duke/releases/tag/0.2)
+2.2 Download the latest `duke-0.2.jar` [here](https://github.com/phaebaez/duke/releases/download/0.2/duke-0.2.jar)
 
 2.3 Copy the file to the folder you want to use as the home folder for your Personal Assistant Togepi.
 
@@ -23,8 +23,6 @@ Personal Assistant Togepi (PAT) is for those who *prefer to use a desktop app fo
 * `todo` `n/homework`: adds a todo with the description `homework` to the library.
 * `delete``3` : deletes the 3rd task shown in the current list
 * `bye` : exits the app
-
-2.7 Refer to **Features** for details of each command.
 
 ## 3. Features 
 
