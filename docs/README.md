@@ -7,7 +7,7 @@ Personal Assistant Togepi (PAT) is for those who *prefer to use a desktop app fo
 ## Quick Start
 
 1. Ensure you have Java `11` or above installed in your Computer.
-2. Download the latest `duke-0.2.jar` link:{repoURL}/releases[here].
+2. Download the latest `duke-0.2.jar` [here](https://github.com/phaebaez/duke/releases/tag/0.2)
 3. Copy the file to the folder you want to use as the home folder for your Personal Assistant Togepi.
 4. Double-click the file to start the app. The GUI should appear in a few seconds. 
 ![GitHub Logo](Ui.png)
@@ -35,7 +35,7 @@ Format: `todo n/DESCRIPTION`
 Examples:
 
 * `todo n/study for midterms` +
-Returns a new *todo* with the description `study for midterms`. Displays the message `Togepi has found something and added it to her storage: [T] x study math Now you have x tasks in your list`.
+Returns a new *todo* with the description `study for midterms`. Displays the message `Togepi has found something and added it to her storage: [T] x study for midterms Now you have x tasks in your list`.
 
 ### Feature 2
 
@@ -47,7 +47,7 @@ Format: `todo n/DESCRIPTION /by d/DATE`
 Examples:
 
 * `deadline n/assignment 0 /by 2/12/2020` +
-Returns a new *deadline* with the description `assignment 0`. Displays the message `Togepi has found something and added it to her storage: [D] x study for test (by Dec 2 2020) Now you have x tasks in your list`.
+Returns a new *deadline* with the description `assignment 0`. Displays the message `Togepi has found something and added it to her storage: [D] x assignment 0 (by Dec 2 2020) Now you have x tasks in your list`.
 
 ### Feature 3
 
@@ -58,6 +58,6 @@ Format: `todo n/DESCRIPTION /at d/DATE`
 
 Examples:
 
-* `event n/marathon /by 5/10/2020` +
+* `event n/marathon /by 4/4/2020` +
 Returns a new *event* with the description `marathon`. Displays the message `Togepi has found something and added it to her storage: [E] x marathon (at April 4 2020) Now you have x tasks in your list`.
 
