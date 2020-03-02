@@ -12,7 +12,8 @@ Personal Assistant Togepi (PAT) is for those who *prefer to use a desktop app fo
 
 2.3 Copy the file to the folder you want to use as the home folder for your Personal Assistant Togepi.
 
-2.4 Double-click the file to start the app. The GUI should appear in a few seconds. 
+2.4 Start up the application. It should look as follows: 
+
 ![GitHub Logo](Ui.png)
 
 2.5 Type the command in the command box and press <kbd>Enter</kbd> to execute it. E.g. typing *`help`* and pressing <kbd>Enter</kbd> will open the help window.
