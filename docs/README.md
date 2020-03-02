@@ -23,7 +23,7 @@ E.g. typing *`help`* and pressing <kbd>Enter</kbd> will open the help window.
 
 * `list` : lists all the tasks in the library 
 * `todo` `n/homework`: adds a todo with the description `homework` to the library.
-* `delete``3` : deletes the 3rd task shown in the current list
+* `delete` `3` : deletes the 3rd task shown in the current list
 * `bye` : exits the app
 
 ## 3. Features 
