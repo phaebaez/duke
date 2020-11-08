@@ -34,3 +34,15 @@ public class Event extends Task {
     }
 }
 
+
+	case StatementType::READ:
+		statementNumber += 1;
+		result = parseRead(tokens);
+		if (!result) throw ParseException("parseRead fails");
+		break;
+	case StatementType::FOR:
+		statementNumber += 1;
+		result = parseFor(tokens);
+		if (!result) throw ParseException("parseFor fails");
+		break;
+
